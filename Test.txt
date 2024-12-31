@@ -1,1 +1,26 @@
-This page refer to Test
+$(function () {
+  const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+  if (loggedInUser) {
+    $("#login-item, #signup-item").addClass("d-none");
+    $("#profile-item, #logout-item").removeClass("d-none");
+  } else {
+    $("#login-item, #signup-item").removeClass("d-none");
+    $("#profile-item, #logout-item").addClass("d-none");
+  }
+
+  $("#logout-button").click(function () {
+    sessionStorage.removeItem("loggedInUser");
+    alert("You have been logged out.");
+    window.location.href = "login.html";
+  });
+
+  $("#loginForm").submit(function (e) {
+    e.preventDefault();
+    hideError();
+
+    const email = $("#email").val().trim().toLowerCase();
+    const password = $("#password").val().trim();
+
+    loginHandler(email, password);
+  });This page refer to Test
